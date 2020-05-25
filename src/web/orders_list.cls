@@ -47,11 +47,11 @@ ClassMethod body() As %Status
 
                 { id:"orderID", header:"OrderID", adjust:"true" },
 
-                { id:"visitor", header:"VisitorID", adjust:"true" },
+                { id:"visitor", header:"VisitorName", adjust:"true" },
 
                 { id:"date", header:"Date", adjust:"true" },
 
-                { id:"service", header:"ServiceID", adjust:"true" },
+                { id:"service", header:"ServiceName", adjust:"true" },
 
                 { id:"sum", header:"Sum", adjust:"true" },
 
