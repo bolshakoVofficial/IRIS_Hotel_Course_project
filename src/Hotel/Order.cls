@@ -3,11 +3,15 @@ Class Hotel.Order Extends %Persistent
 
 Index orderID On (date, visitor, service) [ PrimaryKey ];
 
-Property visitor As Hotel.Visitor;
+Property visitorID As Hotel.Visitor;
+
+Property visitor As %String;
 
 Property date As %Date;
 
-Property service As Hotel.Service;
+Property serviceID As Hotel.Service;
+
+Property service As %String;
 
 Property sum As %Integer;
 
@@ -35,6 +39,12 @@ Storage Default
 <Value name="7">
 <Value>date</Value>
 </Value>
+<Value name="8">
+<Value>visitorID</Value>
+</Value>
+<Value name="9">
+<Value>serviceID</Value>
+</Value>
 </Data>
 <DataLocation>^Hotel.OrderD</DataLocation>
 <DefaultData>OrderDefaultData</DefaultData>
@@ -47,9 +57,11 @@ Storage Default
 ClassMethod saveOrder(order As Hotel.Order) As %Status
 {
     set obj = ##class(Hotel.Order).%New()
-    set obj.visitor = ##class(Hotel.Visitor).%OpenId(order.visitor)
+    set obj.visitorID = ##class(Hotel.Visitor).%OpenId(order.visitor)
+    set obj.visitor = obj.visitorID.name
     set obj.date = order.date
-    set obj.service = ##class(Hotel.Service).%OpenId(order.service)
+    set obj.serviceID = ##class(Hotel.Service).%OpenId(order.service)
+    set obj.service = obj.serviceID.name
     set obj.sum = order.sum
     set result = obj.%Save()
     Return ##class(Hotel.Utils).getStatus(result)
